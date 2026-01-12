@@ -7,9 +7,9 @@ const server = http.createServer((req, res) => {
     console.log(`request masuk : ${req.method} ${req.url}`);
 
     res.writeHead(200, { "Content-Type": "text/plain" });
-    res.end("Hello World\n");
+    res.end("Hello assalamualaikum\n");
 });
 
 server.listen(PORT, HOST, () => {
-    console.log(`Server berjalan di http://${HOST}:${PORT}`);
+    // console.log(`Server berjalan di http://${HOST}:${PORT}`);
 });
