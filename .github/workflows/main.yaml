@@ -14,22 +14,25 @@ on:
 jobs:
   build: # nama job
     runs-on: ubuntu-latest # mesin virtual
-
+    # Build Docker Image
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4 # prebuilt action
 
-      - name: Setup Node.js # setting nodejs
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      - name: Install Dependencies # install dependencies
-        run: npm install
-      
-      # - name: Run Tests
-      #   run: npm test --if-present
+      - name: Build Docker Image 
+        run: docker build -t my-app:${{ github.sha }} .
 
       - name: Build Success # kalau build success
-        run: echo "Build Success"
+        run: echo "Docker Image Build Success"
+  
+  deploy: # nama job
+    needs: build
+    runs-on: ubuntu-latest # mesin virtual
+    if: github.ref == 'refs/heads/master'
+    # Build Docker Image
+    steps:
+      - name: trigger deployment
+        run: echo "Deployment Triggered"
+
+
 
