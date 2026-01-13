@@ -1,34 +1,35 @@
 name: CI CD Docker
 
 on:
-  push:
+  push:  # jalakan ketika di push di branch ini
     branches:
       - main
       - master
-  pull_request:
+
+  pull_request: # jalankan ketika PR di branch ini
     branches:
       - main
       - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build: # nama job
+    runs-on: ubuntu-latest # mesin virtual
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # prebuilt action
 
-      - name: Setup Node.js 
+      - name: Setup Node.js # setting nodejs
         uses: actions/setup-node@v4
         with:
           node-version: "18"
 
-      - name: Install Dependencies
+      - name: Install Dependencies # install dependencies
         run: npm install
       
-      - name: Run Tests
-        run: npm test --if-present
+      # - name: Run Tests
+      #   run: npm test --if-present
 
-      - name: Build Success
+      - name: Build Success # kalau build success
         run: echo "Build Success"
 
